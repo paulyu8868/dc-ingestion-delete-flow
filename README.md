@@ -25,10 +25,9 @@
 # 세팅 방법
 
 ## 사전 준비
-- Data Cloud 사용 가능한 org + 관리자 권한
-- **삭제 대상**: Ingestion API 로 적재된 객체 + 그 **Primary Key 를 앎**(예 `fm_pk`). 이 파이프라인은 그 PK 값으로 삭제한다.
-- **트리거 소스**: 삭제할 **PK 목록을 담은 DMO**. 채우는 방법은 무관(Data Transform · 별도 적재 · 수동 등).
-  Triggered Flow 는 DMO/CIO 에만 걸리므로, DLO 면 DMO 로 매핑해 둔다.
+- **삭제 대상(Ingestion API)**: Ingestion API로 적재중인 DLO
+- **트리거 소스(DMO)**: 삭제할 **PK 목록을 담은 DMO**. 채우는 방법은 무관(Data Transform · Data Stream · 별도 적재 등).
+  Triggered Flow 는 DMO/CIO 에만 적용 가능하므로, DLO는 DMO 로 매핑해 사용한다.
 - `client_credentials` 가능한 Connected App (브라우저 승인 없는 인증에 사용)
 
 ## 세팅 순서
