@@ -16,7 +16,7 @@
                     DELETE callout:{NamedCredential}/api/v1/ingest/sources/{source}/{object}
                                     │  body {"ids":[...]}  →  202 (async ~3분)
                                     ▼
-                          원본 DLO 에서 해당 fm_pk 레코드 삭제
+                          원본 DLO 에서 해당 레코드(pk기준) 삭제
 ```
 
 구조·원리(왜 이렇게 나뉘는지, 인증 동작 원리, Apex 코드 구조)는 → [`docs/concept.md`](docs/concept.md)
