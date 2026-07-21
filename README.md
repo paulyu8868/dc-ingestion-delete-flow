@@ -4,7 +4,7 @@
 
 
 삭제 대상 `fm_pk` 목록이 담긴 **DMO에 레코드가 들어오면**, Data Cloud-Triggered Flow가
-**Invocable Apex**를 호출해 **Ingestion DELETE API**로 원본 DLO의 해당 레코드를 삭제한다.
+**Invocable Apex**를 호출 -> **Ingestion DELETE API**로 원본 DLO의 해당 레코드를 삭제한다.
 
 ```
 삭제-id DMO ──(record created)──▶ Data Cloud-Triggered Flow
