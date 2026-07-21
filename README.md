@@ -1,4 +1,4 @@
-# [테스트 완료]Data Cloud 삭제 자동화 — Triggered Flow → Apex (세팅 가이드)
+# [테스트 완료] Ingestion API 삭제 자동화 (Data Cloud Triggered Flow → Apex) 세팅 가이드
 
 <img width="895" height="644" alt="image" src="https://github.com/user-attachments/assets/4ab3390a-5378-4e2e-b0c0-3f1cfe3e9aad" />
 
