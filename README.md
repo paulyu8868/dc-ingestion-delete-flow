@@ -1,5 +1,8 @@
 # Data Cloud 삭제 자동화 — Triggered Flow → Apex (세팅 가이드)
 
+<img width="895" height="644" alt="image" src="https://github.com/user-attachments/assets/4ab3390a-5378-4e2e-b0c0-3f1cfe3e9aad" />
+
+
 삭제 대상 `fm_pk` 목록이 담긴 **DMO에 레코드가 들어오면**, Data Cloud-Triggered Flow가
 **Invocable Apex**를 호출해 **Ingestion DELETE API**로 원본 DLO의 해당 레코드를 삭제한다.
 
@@ -16,10 +19,10 @@
                           원본 DLO 에서 해당 fm_pk 레코드 삭제
 ```
 
-이 저장소는 위 파이프라인의 **세팅 방법**을 정리한다.
 구조·원리(왜 이렇게 나뉘는지, 인증 동작 원리, Apex 코드 구조)는 → [`docs/concept.md`](docs/concept.md)
 
 ---
+# 세팅 방법
 
 ## 사전 준비
 - Data Cloud 사용 가능한 org + 관리자 권한
