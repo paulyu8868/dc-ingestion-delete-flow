@@ -1,8 +1,7 @@
 # 02. Apex 배포
 
-## 무엇 / 왜
-삭제 로직(`DataCloudIngestDelete`)과 토큰 교환(`DataCloudAuthProvider`), Auth Provider 설정 저장용
-CMDT(`DataCloud_Auth_Provider__mdt`)를 org 에 올린다. Auth Provider 등록(03) 전에 클래스가 org 에 있어야 한다.
+> 삭제 로직(`DataCloudIngestDelete`)과 토큰 교환(`DataCloudAuthProvider`), Auth Provider 설정 저장용
+> CMDT(`DataCloud_Auth_Provider__mdt`)를 org 에 배포한다. Auth Provider 등록에는 `DataCloudAuthProvider` 클래스 배포가 선행되어야함.
 
 ## 배포 대상
 ```
