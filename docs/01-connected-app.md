@@ -1,25 +1,51 @@
 # 01. Connected App (Client Credentials)
 
-## 무엇 / 왜
-Auth Provider 가 **브라우저 로그인 없이** core token 을 발급받기 위한 머신 자격.
-콜아웃은 이 App 의 **Run-As 유저 권한**으로 실행되므로, 그 유저가 삭제 권한을 가져야 실제로 지워진다.
+## Connected App 생성
 
-> 이미 client_credentials 용 Connected App 이 있으면 그걸 재사용해도 된다.
+- Setup(⚙️) > External Client Apps > Settings  > **New Connected App**
 
-## 방법
-1. Setup > **App Manager** > 대상 Connected App > **Manage** (없으면 New Connected App 으로 생성)
-   > 📷 [스크린샷] App Manager 목록
-2. **Enable OAuth Settings** + OAuth Scopes 에 최소 `Manage Data Cloud Ingestion API data (cdp_ingest_api)`, `api` 추가
-   > 📷 [스크린샷] OAuth Scopes
-3. **Enable Client Credentials Flow** 체크
-   > 📷 [스크린샷] Client Credentials Flow 체크
-4. **Manage > Edit Policies** > *Client Credentials Flow* 의 **Run As** 유저 지정
-   > 📷 [스크린샷] Run As 유저 지정
-5. Consumer Key(=Client Id) / Consumer Secret(=Client Secret) 확보 → [03-auth-provider](03-auth-provider.md) 에서 사용
+> **Basic Information**
+> - Connected App Name
+> - API Name
+> - Contact Email
+
+필수 정보만 입력 후 **Save**
+
+## 세부 설정
+1) Setup > **App Manager** > 대상 Connected App(▼) > **Edit**
+> **API (Enable OAuth Settings)**
+> - ✅**Enable OAuth Settings** 체크
+>    - **Callback URL**:
+>       - `http://localhost:55555/Callback`
+>       - `http://localhost:55556/Callback`
+>       - `http://localhost:55557/Callback`
+>       - `http://localhost:55558/Callback`
+>       - `http://localhost:55559/Callback`
+>    - **Selected OAuth Scopes**:
+>       - `Manage user data via APIs (api)`
+>       - `Perform requests at any time (refresh_token, offline_access)`
+>       - `Access all Data Cloud API resources (cdp_api)`
+> - ✅**Enable Client Credentials Flow** 체크
+
+
+**Save**
+
+  
+2) **Manage > Edit Policies**
+> **OAuth Policies**
+> - Permitted Users: `All users may self-authorize`
+
+
+> **Client Credentials Flow**
+> - **Run As** : `Data Cloud Architect` 권한이 있는 유저
+
+
+**Save**
 
 ## 확인
-- Run-As 유저에 **`cdp_ingest_api` 권한 + 대상 데이터 스트림 삭제 권한**이 있는지.
-- (선택) Client Credentials 토큰이 실제 발급되는지 curl/스크립트로 사전 확인.
+- Run-As 유저에 `Data Cloud Architect` 권한이 있는지.
+- **Enable Client Credentials** 체크 여부.
+- Enable OAuth Settings 누락이 없는지.
 
 ## 트러블슈팅
 | 증상 | 원인 |
