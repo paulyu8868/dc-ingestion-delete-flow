@@ -3,8 +3,8 @@
 <img width="895" height="644" alt="image" src="https://github.com/user-attachments/assets/4ab3390a-5378-4e2e-b0c0-3f1cfe3e9aad" />
 
 
-삭제 대상 `fm_pk` 목록이 담긴 **DMO에 레코드가 들어오면**, Data Cloud-Triggered Flow가
-**Invocable Apex**를 호출 -> **Ingestion DELETE API**로 원본 DLO의 해당 레코드를 삭제한다.
+`삭제할 PK 목록을 담는 DMO`에 레코드가 들어오면, Data Cloud-Triggered Flow가
+**Invocable Apex**를 호출하고 `타겟 DLO`의 레코드를 삭제한다(**Ingestion DELETE API**).
 
 ```
 삭제-id DMO ──(record created)──▶ Data Cloud-Triggered Flow
@@ -25,10 +25,10 @@
 # 세팅 방법
 
 ## 사전 준비
-- **삭제 대상(Ingestion API)**: Ingestion API로 적재중인 DLO
+- **삭제 대상(Ingestion API)**: `Ingestion API` 커넥터를 사용중인 DLO만 해당.
 - **트리거 소스(DMO)**: 삭제할 **PK 목록을 담은 DMO**. 채우는 방법은 무관(Data Transform · Data Stream · 별도 적재 등).
   Triggered Flow 는 DMO/CIO 에만 적용 가능하므로, DLO는 DMO 로 매핑해 사용한다.
-- `client_credentials` 가능한 Connected App (브라우저 승인 없는 인증에 사용)
+- **배포 및 권한 설정**: 아래 `세팅 순서` 참고.
 
 ## 세팅 순서
 
