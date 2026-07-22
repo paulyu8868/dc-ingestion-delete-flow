@@ -2,7 +2,7 @@
 
 ## Connected App 생성
 
-- Setup(⚙️) > External Client Apps > Settings  > **New Connected App**
+- Setup(⚙️) > External Client Apps > Settings  > **New Connected App**
 
 > **Basic Information**
 > - Connected App Name
@@ -50,6 +50,7 @@
 ## 트러블슈팅
 | 증상 | 원인 |
 |---|---|
+| `invalid_app_access: user is not admin approved` | Permitted Users 미승인 → `All users may self-authorize` 또는 앱에 Run-As 유저의 권한셋/Profile 연결 |
 | `no client credentials user enabled` | Client Credentials Flow / Run-As 유저 미설정 |
 | 삭제 202 인데 반영 안 됨 | Run-As 유저 권한 부족(cdp_ingest_api / 삭제 권한) |
 

@@ -17,8 +17,10 @@ from dotenv import load_dotenv
 
 MD_API = "62.0"
 HERE = os.path.dirname(os.path.abspath(__file__))
-# 배포 자격: salesforce-cli 프로젝트 .env (flipper 배포에 쓰인 것)
-DEPLOY_ENV = os.path.abspath(os.path.join(HERE, "..", "..", "salesforce-cli(데이터클라우드)", ".env"))
+SRC = os.path.join(HERE, "force-app", "main", "default")   # SFDX 표준 소스 경로
+# 배포 자격 .env: 환경변수 SF_DEPLOY_ENV 로 지정하거나, 스크립트 옆의 .env (gitignore 됨).
+# 필요한 키: SF_LOGIN_URL, SF_CLIENT_ID, SF_CLIENT_SECRET (+ 선택 SF_USERNAME, SF_PASSWORD_AND_TOKEN)
+DEPLOY_ENV = os.environ.get("SF_DEPLOY_ENV") or os.path.join(HERE, ".env")
 
 NS = "http://soap.sforce.com/2006/04/metadata"
 CLASSES = ["DataCloudAuthProvider", "DataCloudAuthProviderTest",
@@ -42,13 +44,13 @@ def core_token():
 
 
 def readf(*p):
-    with open(os.path.join(HERE, *p), encoding="utf-8") as f:
+    with open(os.path.join(SRC, *p), encoding="utf-8") as f:
         return f.read()
 
 
 def build_object_mdapi(obj_name):
     """소스포맷 objects/<obj>/ → MDAPI 단일 .object 문자열."""
-    base = os.path.join(HERE, "objects", obj_name)
+    base = os.path.join(SRC, "objects", obj_name)
     ET.register_namespace("", NS)
     meta = ET.parse(os.path.join(base, obj_name + ".object-meta.xml")).getroot()
     def g(tag):

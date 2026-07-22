@@ -56,11 +56,14 @@ System.debug(DataCloudIngestDelete.run(new List<DataCloudIngestDelete.Request>{ 
 `success=true`, 202 접수 → ~3분 뒤 원본 DLO 에서 해당 행 삭제 확인.
 
 ## 리포지토리 구성
+표준 SFDX 프로젝트 — VS Code / sf CLI 로 clone → 인증 → 배포가 그대로 된다.
 ```
-classes/         Apex (DataCloudIngestDelete, DataCloudAuthProvider, 각 Test)
-objects/         DataCloud_Auth_Provider__mdt (Auth Provider 설정 저장용 CMDT)
-deploy_apex.py   sf CLI 없이 Metadata API 로 배포 (→ docs/02)
-docs/            세팅 상세 + 개념 문서
+sfdx-project.json                 SFDX 프로젝트 정의
+force-app/main/default/
+  classes/                        Apex (DataCloudIngestDelete, DataCloudAuthProvider, 각 Test)
+  objects/                        DataCloud_Auth_Provider__mdt (Auth Provider 설정 CMDT)
+deploy_apex.py                    sf CLI 없는 환경용 fallback 배포 (→ docs/02)
+docs/                             세팅 상세 + 개념 문서
 ```
 
 ## 참고
