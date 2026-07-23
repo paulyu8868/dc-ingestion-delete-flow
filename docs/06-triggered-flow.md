@@ -1,16 +1,15 @@
 # 06. Data Cloud-Triggered Flow
 
-## 무엇 / 왜
-**삭제할 PK 목록이 담긴 DMO** 에 레코드가 생기면 발동해, PK(`fm_pk`)를 모아
-Invocable Apex(`DataCloudIngestDelete`)를 호출. DLO/DMO 엔 Apex 트리거가 안 걸리므로
-이 Flow 가 "레코드 트리거" 역할을 한다.
+> Apex Trigger를 **Data Cloud-Triggered Flow**로 대체함.
+>  **삭제할 PK 목록이 담긴 DMO** 에 레코드가 생기면 해당 Flow가 Trigger되며, Invocable Apex(`DataCloudIngestDelete`)에 삭제할 PK 리스트를 전달하고 호출한다.
 
-> 이 DMO 를 **어떻게 채우는지는 무관**하다(Data Transform, 별도 ingestion, 수동 등).
-> 요건은 "삭제할 PK 목록을 담은 **DMO**" 하나뿐. (DLO 라면 DMO 로 매핑 필요 — 트리거는 DMO/CIO 에만 걸림)
+<img width="592" height="759" alt="image" src="https://github.com/user-attachments/assets/7edca42a-ad40-442a-9ab3-ff70ef0655e4" />
 
 ## 선행 조건
-- Apex 배포(02), 인증 완료(05 인증됨)
-- 삭제할 PK 목록을 담은 **DMO** 존재 + 그 DMO 에 PK 필드(`fm_pk`) 노출
+- 앞선 단계(01 ~ 05)
+- 삭제할 PK 목록을 담은 **DMO**
+  - DLO는 직접적으로 사용 불가능. DMO 매핑 필요
+  - DLO 적재 방법은 상관없음(Data Transform, Ingestion... 등)   
 
 ## 방법
 ### 1) Flow 생성
@@ -50,8 +49,5 @@ Invocable Apex(`DataCloudIngestDelete`)를 호출. DLO/DMO 엔 Apex 트리거가
 2. 원본 DLO 에서 해당 `fm_pk` 삭제 확인 (Data Explorer 또는 Query API v2)
    > 📷 [스크린샷] 삭제 전/후 카운트
 
-## 주의
-- **fm_pk 필드 매핑 오류가 최다 함정**: 다른 필드를 넘기면 202 는 나오지만 안 지워짐.
-- 비동기 지연으로 즉시 반영 안 됨 — 몇 분 대기 후 확인.
 
 관련: [개념 §4·§5](concept.md)
