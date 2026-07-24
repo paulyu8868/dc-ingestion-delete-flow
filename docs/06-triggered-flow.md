@@ -61,7 +61,8 @@
 ## 테스트
 1. PK 목록 DMO 에 소량(3~5건) `pk` 투입 → Flow 발동 → DELETE(202)
 2. 원본 Data Stream 에서 레코드 삭제 확인
-   > ![Uploading image.png…]()
+   > <img width="1244" height="769" alt="image" src="https://github.com/user-attachments/assets/3d5a80a1-d892-43a4-8375-136639eee848" />
+
 
 
 
