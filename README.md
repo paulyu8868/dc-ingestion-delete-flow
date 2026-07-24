@@ -44,7 +44,7 @@
 | 6 | Data Cloud-Triggered Flow | [`docs/06-triggered-flow.md`](docs/06-triggered-flow.md) |
 
 ## 검증 (스모크 테스트)
-Named Credential 인증 후, Apex 를 직접 호출해 삭제 경로 확인:
+Named Credential 인증 후, Apex 를 직접 호출(Developer Console)해 삭제 경로 확인:
 ```apex
 DataCloudIngestDelete.Request q = new DataCloudIngestDelete.Request();
 q.ids = new List<String>{ '<실제 fm_pk 1개>' };
@@ -55,7 +55,7 @@ System.debug(DataCloudIngestDelete.run(new List<DataCloudIngestDelete.Request>{ 
 ```
 `success=true`, 202 접수 → ~3분 뒤 원본 DLO 에서 해당 행 삭제 확인.
 
-## 리포지토리 구성
+## 레포 구성
 표준 SFDX 프로젝트 — VS Code / sf CLI 로 clone → 인증 → 배포가 그대로 된다.
 ```
 sfdx-project.json                 SFDX 프로젝트 정의
