@@ -53,7 +53,7 @@ q.objectName = '<Ingestion object명>';
 q.namedCredential = '<Named Credential 이름>';
 System.debug(DataCloudIngestDelete.run(new List<DataCloudIngestDelete.Request>{ q }));
 ```
-`success=true`, 202 접수 → ~3분 뒤 원본 DLO 에서 해당 행 삭제 확인.
+`success=true`, 202 접수 → 5~10분 뒤 원본 DLO 에서 해당 행 삭제 확인.
 
 ## 레포 구성
 표준 SFDX 프로젝트 — VS Code / sf CLI 로 clone → 인증 → 배포가 그대로 된다.
