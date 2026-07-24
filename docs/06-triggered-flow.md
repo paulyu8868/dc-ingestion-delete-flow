@@ -9,45 +9,60 @@
 - 앞선 단계(01 ~ 05)
 - 삭제할 PK 목록을 담은 **DMO**
   - DLO는 직접적으로 사용 불가능. DMO 매핑 필요
-  - DLO 적재 방법은 상관없음(Data Transform, Ingestion... 등)   
+  - DLO 적재 방식은 상관없음(Data Transform, Ingestion... 등)   
 
-## 방법
+## ⚙️세팅 방법
 ### 1) Flow 생성
 - Setup > **Flows** > New Flow > **Data Cloud-Triggered Flow**
-- Object: **삭제-id DMO**, Trigger: *A record is created*
-  > 📷 [스크린샷] 트리거 설정
+- Start
+  - **Choose Data Cloud Object**:
+    - 삭제할 PK 목록을 담은 **DMO** 선택
+    - Trigger the Flow When: `A record is created` / `A record is created or updated`
+  > <img width="886" height="793" alt="image" src="https://github.com/user-attachments/assets/c4857477-b6b5-4f6d-850c-b1f4222a6f86" />
 
-### 2) 컬렉션 변수
-- New Resource > Variable, Data Type **Text**, **Allow multiple values** ✅, 이름 예 `fmPkList`
-  > 📷 [스크린샷] 컬렉션 변수 생성
 
-### 3) fm_pk 담기 (Assignment)
-- Variable `{!fmPkList}` / Operator **Add** / Value `{!$Record.fm_pk__c}`
-- ⚠️ DMO 의 **PK 필드 실제 API 이름** 사용 (예 `fm_pk__c`). 이 값이 삭제 대상 데이터 스트림의 Primary Key 여야 삭제 매칭됨.
-  > 📷 [스크린샷] Assignment
+### 2) 삭제 PK 리스트 컬렉션 변수 생성
+- New Resource > Variable
+  - **API Name:** `fmPkList`
+  - **Data Type:** `Text`
+  - ✅**Allow multiple values**
+    
+### 3) 컬렉션에 PK 리스트 담기  (Assignment)
+- `(+)`Add Element > Assignment
+  - **Label:** `deleteListAssignment`
+  - **API Name:** `deleteListAssignment`
+  - **Variable:** `{!fmPkList}`
+  - **Operator:** `Add`
+  - **Value:** `{!$Record.<삭제 PK 컬럼>}` (예시. `{!$Record.fm_pk__c}`)
+    - ⚠️ 삭제 DMO의 **PK 필드 API 이름** 사용
+
 
 ### 4) Apex 액션
-- Action > 검색 **"Data Cloud Ingestion Delete"**
-- 입력(네 개 모두 **필수**):
-  | 입력 | 값(예시) |
-  |---|---|
-  | ids | `{!fmPkList}` |
-  | Source API 이름 | `Ingestion_Refill_Test` |
-  | Object 이름 | `order_original` |
-  | Named Credential 이름 | `DataCloud_Ingest` |
-  > 📷 [스크린샷] 액션 입력
-- (선택) 출력 `success`/`message`/`accepted` 를 변수로 받아 로깅
+- `(+)`Add Element > Action > 검색 `Data Cloud Ingestion Delete`
+  - **Label:** `Data Cloud Ingestion Delete`
+  - **API Name:** `Data_Cloud_Ingestion_Delete`
+  - **Set Input Values**:
+    
+  | 입력 | 값(예시) | 설명 |
+  |---|---|---|
+  | **삭제할 fm_pk (ids) 목록** | `{!fmPkList}` |  |
+  | **Named Credential 이름** | `DataCloud_Ingest` |  |
+  | **Object 이름 (YAML 스키마 object명)** | 예시. `order_original` | ⚠️ 삭제 대상(Ingestion API)의 Object명. **스키마(yaml)에 등록된 Object명 기준** |
+  | **Source API 이름 (Ingestion API 소스명)** | 예시. `Ingestion_Refill_Test` | ⚠️삭제 대상(Ingestion API)의 **Ingestion API명** |
+
 
 ### 5) Save & **Activate**
+- Save 후 Activate
 
 ## 동작 이해
-- Flow 는 레코드별로 돌지만 Data Cloud 가 배치로 묶어 Apex 를 호출 → Apex 가 모든 `fm_pk` 를
+- Flow 는 레코드별로 돌지만 Data Cloud 가 배치로 묶어 Apex 를 호출 → Apex 가 모든 `pk` 를
   200개씩 취합 전송(대량 안전). 상세: [개념 §4](concept.md)
 
 ## 테스트
-1. PK 목록 DMO 에 소량(3~5건) `fm_pk` 투입 → Flow 발동 → DELETE(202, async ~3분)
-2. 원본 DLO 에서 해당 `fm_pk` 삭제 확인 (Data Explorer 또는 Query API v2)
-   > 📷 [스크린샷] 삭제 전/후 카운트
+1. PK 목록 DMO 에 소량(3~5건) `pk` 투입 → Flow 발동 → DELETE(202)
+2. 원본 Data Stream 에서 레코드 삭제 확인
+   > ![Uploading image.png…]()
+
 
 
 관련: [개념 §4·§5](concept.md)
