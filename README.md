@@ -69,4 +69,4 @@ docs/                             세팅 상세 + 개념 문서
 ## 참고
 - `DataCloudIngestDelete` 는 source/object/NamedCredential 을 **필수 인자**로 받는 범용 컴포넌트다.
   대상이 다른 DMO 여도 이 세 값만 바꿔 재사용한다. (Apex 상세: [`docs/concept.md`](docs/concept.md))
-- 삭제는 **비동기(~3분)**. 실제 반영은 시차가 있다.
+- 삭제는 **비동기(5~15분)**. 실제 반영은 시차가 있다.
