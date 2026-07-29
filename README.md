@@ -6,7 +6,12 @@
 `삭제할 PK 목록을 담는 DMO`에 레코드가 들어오면, Data Cloud-Triggered Flow가
 **Invocable Apex**를 호출하고 `타겟 DLO`의 레코드를 삭제한다(**Ingestion DELETE API**).
 
+<img width="1205" height="784" alt="image" src="https://github.com/user-attachments/assets/3de2b0e8-c7ae-46ea-8c90-fb31bea00931" />
+
+
+
 ```
+
 삭제-id DMO ──(record created)──▶ Data Cloud-Triggered Flow
                                     │  fm_pk 를 컬렉션으로 수집
                                     ▼
