@@ -1,14 +1,18 @@
 # [테스트 완료] Ingestion API 삭제 자동화 (Data Cloud Triggered Flow → Apex) 세팅 가이드
 
+
+
 <img width="895" height="644" alt="image" src="https://github.com/user-attachments/assets/4ab3390a-5378-4e2e-b0c0-3f1cfe3e9aad" />
 
 
 `삭제할 PK 목록을 담는 DMO`에 레코드가 들어오면, Data Cloud-Triggered Flow가
 **Invocable Apex**를 호출하고 `타겟 DLO`의 레코드를 삭제한다(**Ingestion DELETE API**).
 
-<img width="1205" height="784" alt="image" src="https://github.com/user-attachments/assets/3de2b0e8-c7ae-46ea-8c90-fb31bea00931" />
+
+<img width="928" height="659" alt="image" src="https://github.com/user-attachments/assets/37876a73-dc12-48d6-a78d-6684044cdc97" />
 
 
+## 구조
 
 ```
 
