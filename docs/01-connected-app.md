@@ -47,6 +47,21 @@
 - **Enable Client Credentials** 체크 여부.
 - Enable OAuth Settings 누락이 없는지.
 
+
+## ECA 버전
+- Setup > External Client App Manager > New External Client App
+- Name, Contact Email 입력, Distribution State는 Local
+- API (Enable OAuth Settings) > Enable OAuth 체크
+- Callback URL: https://localhost (사용되지 않는 자리표시자)
+- Scopes: api, refresh_token, offline_access, cdp_api (기존 레포와 동일). 필요하면 cdp_ingest_api도 추가
+- Flow Enablement: ✅ Enable Client Credentials Flow
+- ⚠️ “Issue JWT-based access tokens for named users”는 해제. Data 360 공식 가이드가 해제하도록 안내합니다.
+- 저장 후 Edit > Policies 탭
+- OAuth Flows 영역에서 Enable Client Credentials Flow 체크
+- Run As (Username): Data Cloud Architect 권한이 있는 유저
+- Permitted Users / Selected Profiles: Run As 유저가 접근할 수 있도록 설정
+- 앱 상세 > OAuth Settings에서 Consumer Key / Consumer Secret 복사 → 03단계(Auth Provider)의 Client Id/Secret에 입력
+
 ## 트러블슈팅
 | 증상 | 원인 |
 |---|---|
