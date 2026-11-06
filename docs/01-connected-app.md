@@ -52,7 +52,12 @@
 - Setup > External Client App Manager > New External Client App
 - Name, Contact Email 입력, Distribution State는 Local
 - API (Enable OAuth Settings) > Enable OAuth 체크
-- Callback URL: https://localhost (사용되지 않는 자리표시자)
+- Callback URL:
+> - http://localhost:55555/Callback
+> - http://localhost:55556/Callback
+> - http://localhost:55557/Callback
+> - http://localhost:55558/Callback
+> - http://localhost:55559/Callback
 - Scopes: api, refresh_token, offline_access, cdp_api (기존 레포와 동일). 필요하면 cdp_ingest_api도 추가
 - Flow Enablement: ✅ Enable Client Credentials Flow
 - ⚠️ “Issue JWT-based access tokens for named users”는 해제. Data 360 공식 가이드가 해제하도록 안내합니다.
