@@ -49,8 +49,7 @@ sf project deploy start -d force-app
 
 ```bash
 # 테스트 후 커버리지
-sf apex run test --tests DataCloudAuthProviderTest --tests DataCloudIngestDeleteTest \
-  --code-coverage --result-format human --wait 10
+sf apex run test --tests DataCloudAuthProviderTest --tests DataCloudIngestDeleteTest --code-coverage --result-format human --wait 10
 ```
 ---
 
